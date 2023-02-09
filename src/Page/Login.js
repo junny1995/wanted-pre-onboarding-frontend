@@ -34,7 +34,9 @@ function Login() {
     <div>
       <input onChange={onChangeEmail} placeholder="이메일" />
       <input onChange={onChangePassword} placeholder="비밀번호" />
-      <button onClick={SignIpHandler}>로그인</button>
+      <button onClick={SignIpHandler} data-testid="signin-button">
+        로그인
+      </button>
     </div>
   );
 }

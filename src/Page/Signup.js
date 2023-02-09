@@ -70,7 +70,12 @@ function Signup() {
       <h2>회원가입</h2>
       <div>
         <label>이메일</label>
-        <input type="email" onChange={onChangeEmail} placeholder="이메일" />
+        <input
+          type="email"
+          onChange={onChangeEmail}
+          placeholder="이메일"
+          data-testid="email-input"
+        />
         {email.length > 0 && <span>{emailMessage}</span>}
       </div>
       <div>
@@ -79,10 +84,15 @@ function Signup() {
           type="password"
           onChange={onChangePassword}
           placeholder="비밀번호"
+          data-testid="password-input"
         />
         {password.length > 0 && <span>{passwordMessage}</span>}
       </div>
-      <button onClick={SignUpHandler} disabled={!(isEmail && isPassword)}>
+      <button
+        onClick={SignUpHandler}
+        disabled={!(isEmail && isPassword)}
+        data-testid="signup-button"
+      >
         회원가입
       </button>
     </section>
