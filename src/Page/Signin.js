@@ -1,9 +1,13 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   // env URL
   const URL = process.env.REACT_APP_API_URL;
+
+  // useNavigate
+  const navigate = useNavigate();
 
   // useState
   const [email, setEmail] = useState("");
@@ -20,13 +24,16 @@ function Login() {
 
   const SignIpHandler = async () => {
     try {
-      const a = await axios.post(`${URL}/auth/signin`, {
+      const signin = await axios.post(`${URL}/auth/signin`, {
         email: email,
         password: password,
       });
-      console.log(a);
+      const token = signin.data.access_token;
+      localStorage.setItem("token", token);
+      alert("로그인이 완료되었습니다.");
+      navigate("/todo");
     } catch (e) {
-      console.log(e);
+      alert(e.response.data.message);
     }
   };
 
@@ -34,7 +41,11 @@ function Login() {
     <div>
       <input onChange={onChangeEmail} placeholder="이메일" />
       <input onChange={onChangePassword} placeholder="비밀번호" />
-      <button onClick={SignIpHandler} data-testid="signin-button">
+      <button
+        onClick={SignIpHandler}
+        disabled={!(email && password)}
+        data-testid="signin-button"
+      >
         로그인
       </button>
     </div>
