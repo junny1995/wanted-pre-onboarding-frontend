@@ -1,7 +1,10 @@
 function MainHome() {
   return (
     <>
-      <div>메인페이지</div>
+      <div>
+        <h2>wanted-pre-onboarding-frontend</h2>
+        <span>선발과제 Todo</span>
+      </div>
     </>
   );
 }

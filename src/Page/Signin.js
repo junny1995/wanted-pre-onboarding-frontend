@@ -52,8 +52,19 @@ function Signin() {
 
   return (
     <div>
-      <input onChange={onChangeEmail} placeholder="이메일" />
-      <input onChange={onChangePassword} placeholder="비밀번호" />
+      <h2>로그인</h2>
+      <div>
+        <label>이메일</label>
+        <input type="email" onChange={onChangeEmail} placeholder="이메일" />
+      </div>
+      <div>
+        <label>비밀번호</label>
+        <input
+          type="password"
+          onChange={onChangePassword}
+          placeholder="비밀번호"
+        />
+      </div>
       <button
         onClick={SignIpHandler}
         disabled={!(email && password)}
