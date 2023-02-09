@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // Pages
 import MainHome from "./Page/MainHome";
 import Signup from "./Page/Signup";
-import Login from "./Page/Login";
+import Login from "./Page/Signin";
 
 // Components
 import Header from "./Component/Header";
@@ -20,7 +20,7 @@ function App() {
         <Route path="/" element={<MainHome />} />
         <Route path="/todo" element={<Todo />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/signin" element={<Login />} />
       </Routes>
     </>
   );
