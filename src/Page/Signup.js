@@ -1,6 +1,7 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AuthContext from "../store/AuthContext";
 
 function Signup() {
   // env URL
@@ -8,6 +9,9 @@ function Signup() {
 
   // useNavigate
   const navigate = useNavigate();
+
+  // useContext
+  const authCtx = useContext(AuthContext);
 
   // 이메일, 비밀번호 유효성 메시지
   const [email, setEmail] = useState("");
@@ -64,6 +68,14 @@ function Signup() {
       alert(e.response.data.message);
     }
   };
+
+  // 토큰이 있다면 투두 페이지로 이동
+  useEffect(() => {
+    const isLoggedIn = authCtx.isLoggedIn;
+    if (isLoggedIn) {
+      navigate("/todo");
+    }
+  }, [authCtx, navigate]);
 
   return (
     <section>

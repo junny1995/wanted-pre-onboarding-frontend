@@ -1,13 +1,17 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AuthContext from "../store/AuthContext";
 
-function Login() {
+function Signin() {
   // env URL
   const URL = process.env.REACT_APP_API_URL;
 
   // useNavigate
   const navigate = useNavigate();
+
+  // useContext
+  const authCtx = useContext(AuthContext);
 
   // useState
   const [email, setEmail] = useState("");
@@ -22,6 +26,7 @@ function Login() {
     setPassword(e.target.value);
   };
 
+  // 로그인 Axios
   const SignIpHandler = async () => {
     try {
       const signin = await axios.post(`${URL}/auth/signin`, {
@@ -29,13 +34,21 @@ function Login() {
         password: password,
       });
       const token = signin.data.access_token;
-      localStorage.setItem("token", token);
+      authCtx.login(token);
       alert("로그인이 완료되었습니다.");
       navigate("/todo");
     } catch (e) {
       alert(e.response.data.message);
     }
   };
+
+  // 토큰이 있다면 투두 페이지로 이동
+  useEffect(() => {
+    const isLoggedIn = authCtx.isLoggedIn;
+    if (isLoggedIn) {
+      navigate("/todo");
+    }
+  }, [authCtx, navigate]);
 
   return (
     <div>
@@ -52,4 +65,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Signin;
