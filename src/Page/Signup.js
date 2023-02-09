@@ -1,9 +1,13 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
   // env URL
   const URL = process.env.REACT_APP_API_URL;
+
+  // useNavigate
+  const navigate = useNavigate();
 
   // 이메일, 비밀번호 유효성 메시지
   const [email, setEmail] = useState("");
@@ -17,7 +21,7 @@ function Signup() {
   const [isEmail, setIsEmail] = useState(false);
   const [isPassword, setIsPassword] = useState(false);
 
-  // 이메일, 패스워드 유효성 검사
+  // 이메일 유효성 검사
   const onChangeEmail = (e) => {
     const emailCurrent = e.target.value;
     setEmail(emailCurrent);
@@ -32,6 +36,7 @@ function Signup() {
     }
   };
 
+  // 비밀번호 유효성 검사
   const onChangePassword = (e) => {
     const passwordCurrent = e.target.value;
     setPassword(passwordCurrent);
@@ -46,17 +51,20 @@ function Signup() {
     }
   };
 
+  // 회원가입 Axios
   const SignUpHandler = async () => {
     try {
-      const res = await axios.post(`${URL}/auth/signup`, {
+      await axios.post(`${URL}/auth/signup`, {
         email: email,
         password: password,
       });
-      console.log(res.data.access_token);
+      alert("회원가입이 완료되었습니다.");
+      navigate("/login");
     } catch (e) {
       alert(e.response.data.message);
     }
   };
+
   return (
     <section>
       <h2>회원가입</h2>
