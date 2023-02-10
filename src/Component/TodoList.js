@@ -18,13 +18,13 @@ function TodoList() {
           Authorization: `Bearer ` + localStorage.getItem("token"),
         },
       });
-      console.log("이건 list파일 get요청");
       setTodoData(getTodo.data);
     } catch (e) {
       alert(e.response.data.message);
     }
   };
 
+  // 페이지 첫 랜더링시 한번만 실행
   useEffect(() => {
     GetTodoHandler();
   }, []);

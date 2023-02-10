@@ -34,7 +34,6 @@ function TodoAdd(props) {
 
   return (
     <>
-      <div>추가</div>
       <input
         type="text"
         onChange={onChangeTodo}
