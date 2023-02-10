@@ -69,6 +69,13 @@ function Signup() {
     }
   };
 
+  // 엔터키 입력 이벤트
+  const handlerOnKeyDown = (e) => {
+    if (isEmail && isPassword && e.key === "Enter") {
+      SignUpHandler();
+    }
+  };
+
   // 토큰이 있다면 투두 페이지로 이동
   useEffect(() => {
     const isLoggedIn = authCtx.isLoggedIn;
@@ -96,6 +103,7 @@ function Signup() {
           type="password"
           onChange={onChangePassword}
           placeholder="비밀번호"
+          onKeyDown={handlerOnKeyDown}
           data-testid="password-input"
         />
         {password.length > 0 && <span>{passwordMessage}</span>}

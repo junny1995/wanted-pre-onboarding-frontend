@@ -60,6 +60,13 @@ function TodoData(props) {
     }
   };
 
+  // 엔터키 입력 이벤트
+  const handlerOnKeyDown = (e) => {
+    if (e.key === "Enter") {
+      UpdateTodoHandler();
+    }
+  };
+
   return (
     <div>
       <ul>
@@ -69,6 +76,7 @@ function TodoData(props) {
               <input
                 type="text"
                 onChange={UpdateInput}
+                onKeyDown={handlerOnKeyDown}
                 placeholder="수정할 할일을 적어주세요"
               />
               <button onClick={UpdateTodoHandler} data-testid="submit-button">

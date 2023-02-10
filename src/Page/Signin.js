@@ -13,7 +13,7 @@ function Signin() {
   // useContext
   const authCtx = useContext(AuthContext);
 
-  // useState
+  // 이메일, 비밀번호 저장 State
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -42,6 +42,13 @@ function Signin() {
     }
   };
 
+  // 엔터키 입력 이벤트
+  const handlerOnKeyDown = (e) => {
+    if (email && password && e.key === "Enter") {
+      SignIpHandler();
+    }
+  };
+
   // 토큰이 있다면 투두 페이지로 이동
   useEffect(() => {
     const isLoggedIn = authCtx.isLoggedIn;
@@ -63,6 +70,7 @@ function Signin() {
           type="password"
           onChange={onChangePassword}
           placeholder="비밀번호"
+          onKeyDown={handlerOnKeyDown}
         />
       </div>
       <button

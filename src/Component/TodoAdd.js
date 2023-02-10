@@ -32,11 +32,19 @@ function TodoAdd(props) {
     }
   };
 
+  // 엔터키 입력 이벤트
+  const handlerOnKeyDown = (e) => {
+    if (e.key === "Enter") {
+      PostTodoHandler();
+    }
+  };
+
   return (
     <>
       <input
         type="text"
         onChange={onChangeTodo}
+        onKeyDown={handlerOnKeyDown}
         placeholder="할일을 작성해주세요!"
         data-testid="new-todo-input"
       />
