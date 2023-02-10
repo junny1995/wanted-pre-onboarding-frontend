@@ -1,5 +1,7 @@
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import TodoAdd from "../Component/TodoAdd";
+import TodoList from "../Component/TodoList";
 import AuthContext from "../store/AuthContext";
 
 function Todo() {
@@ -19,7 +21,8 @@ function Todo() {
 
   return (
     <>
-      <div>Todo페이지</div>
+      <TodoAdd />
+      <TodoList />
     </>
   );
 }
