@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 import AuthContext from "../store/AuthContext";
 
 function Signup() {
@@ -85,38 +86,62 @@ function Signup() {
   }, [authCtx, navigate]);
 
   return (
-    <section>
-      <h2>회원가입</h2>
-      <div>
-        <label>이메일</label>
-        <input
+    <Section className="form-signin signin">
+      <h2 className="h3 mb-3 fw-normal text-white">회원가입</h2>
+      <div className="form-floating">
+        <Input
           type="email"
+          className="form-control bg-secondary mb-2"
           onChange={onChangeEmail}
           placeholder="이메일"
           data-testid="email-input"
         />
-        {email.length > 0 && <span>{emailMessage}</span>}
+        <label className="text-white-50">이메일</label>
+        {email.length > 0 && (
+          <span className={isPassword ? "text-info" : "text-danger"}>
+            {emailMessage}
+          </span>
+        )}
       </div>
-      <div>
-        <label>비밀번호</label>
-        <input
+      <div className="form-floating">
+        <Input
           type="password"
+          className="form-control bg-secondary mb-2"
           onChange={onChangePassword}
           placeholder="비밀번호"
           onKeyDown={handlerOnKeyDown}
           data-testid="password-input"
         />
-        {password.length > 0 && <span>{passwordMessage}</span>}
+        <label className="text-white-50">비밀번호</label>
+        {password.length > 0 && (
+          <span className={isPassword ? "text-info" : "text-danger"}>
+            {passwordMessage}
+          </span>
+        )}
       </div>
       <button
+        className="w-100 btn btn-lg btn-primary"
         onClick={SignUpHandler}
         disabled={!(isEmail && isPassword)}
         data-testid="signup-button"
       >
         회원가입
       </button>
-    </section>
+    </Section>
   );
 }
 
 export default Signup;
+
+// Styled Component
+const Section = styled.div`
+  padding: 70px;
+`;
+
+const Input = styled.input`
+  border: 1px solid black;
+  color: white;
+  :focus {
+    color: white;
+  }
+`;

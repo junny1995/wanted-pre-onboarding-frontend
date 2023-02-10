@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 import AuthContext from "../store/AuthContext";
 
 function Signin() {
@@ -58,30 +59,50 @@ function Signin() {
   }, [authCtx, navigate]);
 
   return (
-    <div>
-      <h2>로그인</h2>
-      <div>
-        <label>이메일</label>
-        <input type="email" onChange={onChangeEmail} placeholder="이메일" />
+    <Section className="form-signin signin">
+      <h2 className="h3 mb-3 fw-normal text-white">로그인</h2>
+      <div className="form-floating">
+        <Input
+          type="email"
+          className="form-control bg-secondary mb-2"
+          onChange={onChangeEmail}
+          placeholder="이메일"
+        />
+        <label className="text-white-50">이메일</label>
       </div>
-      <div>
-        <label>비밀번호</label>
-        <input
+      <div className="form-floating">
+        <Input
           type="password"
+          className="form-control bg-secondary mb-2"
           onChange={onChangePassword}
           placeholder="비밀번호"
           onKeyDown={handlerOnKeyDown}
         />
+        <label className="text-white-50">비밀번호</label>
       </div>
       <button
+        className="w-100 btn btn-lg btn-primary"
         onClick={SignIpHandler}
         disabled={!(email && password)}
         data-testid="signin-button"
       >
         로그인
       </button>
-    </div>
+    </Section>
   );
 }
 
 export default Signin;
+
+// Styled Component
+const Section = styled.div`
+  padding: 70px;
+`;
+
+const Input = styled.input`
+  border: 1px solid black;
+  color: white;
+  :focus {
+    color: white;
+  }
+`;
