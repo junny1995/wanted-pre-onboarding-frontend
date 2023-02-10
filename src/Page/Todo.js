@@ -1,6 +1,5 @@
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import TodoAdd from "../Component/TodoAdd";
 import TodoList from "../Component/TodoList";
 import AuthContext from "../store/AuthContext";
 
@@ -21,7 +20,6 @@ function Todo() {
 
   return (
     <>
-      <TodoAdd />
       <TodoList />
     </>
   );

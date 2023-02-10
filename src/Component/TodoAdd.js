@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
 
-function TodoAdd() {
+function TodoAdd(props) {
+  const { change } = props;
   // env URL
   const URL = process.env.REACT_APP_API_URL;
 
@@ -13,8 +14,8 @@ function TodoAdd() {
     setAddTodo(addTodoCurrent);
   };
 
-  // Todo Axios
-  const TodoAddHandler = async () => {
+  // Post Todo Axios
+  const PostTodoHandler = async () => {
     try {
       await axios.post(
         `${URL}/todos`,
@@ -25,10 +26,12 @@ function TodoAdd() {
           },
         }
       );
+      change();
     } catch (e) {
       alert(e.response.data.message);
     }
   };
+
   return (
     <>
       <div>추가</div>
@@ -38,7 +41,7 @@ function TodoAdd() {
         placeholder="할일을 작성해주세요!"
         data-testid="new-todo-input"
       />
-      <button onClick={TodoAddHandler} data-testid="new-todo-add-button">
+      <button onClick={PostTodoHandler} data-testid="new-todo-add-button">
         추가
       </button>
     </>
