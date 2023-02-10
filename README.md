@@ -1,6 +1,7 @@
 # wanted-pre-onboarding-frontend
 
 - 프리온보드 인턴십 제출과제
+- 모든 코드의 설명은 주석처리 되어있습니다
 
 ## library
 
