@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import styled from "styled-components";
 
 function TodoData(props) {
   const { id, body, change } = props;
@@ -10,6 +11,7 @@ function TodoData(props) {
   // input State
   const [showinput, setShowinput] = useState(false);
   const [updateinput, setUpdateinput] = useState("");
+  const [completeinput, setCompleteinput] = useState(false);
 
   // input boolean Handler
   const InputTrueHandler = () => {
@@ -20,9 +22,13 @@ function TodoData(props) {
   };
 
   // input value onChange
-  const UpdateInput = (e) => {
+  const UpdateInputHandler = (e) => {
     const inputCurrent = e.target.value;
     setUpdateinput(inputCurrent);
+  };
+
+  const CompleteinputHandler = () => {
+    setCompleteinput(!completeinput);
   };
 
   // Update Todo Axios
@@ -37,6 +43,7 @@ function TodoData(props) {
           },
         }
       );
+      setCompleteinput(false);
       InputFalseHandler();
       change();
       console.log("수정성공");
@@ -67,40 +74,94 @@ function TodoData(props) {
     }
   };
 
+  console.log(completeinput);
+
   return (
-    <div>
-      <ul>
-        <li>
+    <section className="pb-3 text-center container">
+      <div className="row">
+        <div className="col-lg-6 mx-auto">
           {showinput ? (
             <>
-              <input
+              <Input
                 type="text"
-                onChange={UpdateInput}
+                className="bg-secondary"
+                onChange={UpdateInputHandler}
                 onKeyDown={handlerOnKeyDown}
                 placeholder="수정할 할일을 적어주세요"
               />
-              <button onClick={UpdateTodoHandler} data-testid="submit-button">
+              <button
+                className="btn btn-primary my-2 p-3 m-2"
+                onClick={UpdateTodoHandler}
+                data-testid="submit-button"
+              >
                 제출
               </button>
-              <button onClick={InputFalseHandler} data-testid="cancel-button">
+              <button
+                className="btn btn-primary my-2 p-3"
+                onClick={InputFalseHandler}
+                data-testid="cancel-button"
+              >
                 취소
               </button>
             </>
           ) : (
-            <>
-              <span>{body}</span>{" "}
-              <button onClick={InputTrueHandler} data-testid="modify-button">
+            <Div>
+              <input
+                type="checkbox"
+                className="check"
+                onClick={CompleteinputHandler}
+              />
+              <Span className={completeinput ? "text-success" : "text-white"}>
+                {body}
+              </Span>
+              <button
+                className="btn btn-primary my-2 p-3 m-2"
+                onClick={InputTrueHandler}
+                data-testid="modify-button"
+              >
                 수정
               </button>
-              <button onClick={DeleteTodoHandler} data-testid="delete-button">
+              <button
+                className="btn btn-primary my-2 p-3"
+                onClick={DeleteTodoHandler}
+                data-testid="delete-button"
+              >
                 삭제
               </button>
-            </>
+            </Div>
           )}
-        </li>
-      </ul>
-    </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
 export default TodoData;
+
+// Styled Component
+const Input = styled.input`
+  height: 50px;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  padding-left: 5px;
+  :focus {
+    outline: none;
+  }
+  ::placeholder {
+    color: white;
+    opacity: 0.5;
+  }
+`;
+
+const Div = styled.div`
+  .check {
+    margin-right: 50px;
+    width: 20px;
+    height: 20px;
+  }
+`;
+
+const Span = styled.span`
+  margin-right: 10%;
+`;

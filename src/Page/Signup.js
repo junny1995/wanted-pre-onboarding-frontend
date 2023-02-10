@@ -98,7 +98,7 @@ function Signup() {
         />
         <label className="text-white-50">이메일</label>
         {email.length > 0 && (
-          <span className={isPassword ? "text-info" : "text-danger"}>
+          <span className={isEmail ? "text-info" : "text-danger"}>
             {emailMessage}
           </span>
         )}

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import styled from "styled-components";
 
 function TodoAdd(props) {
   const { change } = props;
@@ -40,19 +41,41 @@ function TodoAdd(props) {
   };
 
   return (
-    <>
-      <input
+    <section className="pb-3 text-center container">
+      <Input
         type="text"
+        className="bg-secondary"
         onChange={onChangeTodo}
         onKeyDown={handlerOnKeyDown}
         placeholder="할일을 작성해주세요!"
         data-testid="new-todo-input"
       />
-      <button onClick={PostTodoHandler} data-testid="new-todo-add-button">
+      <button
+        className="btn btn-primary my-2 p-3"
+        onClick={PostTodoHandler}
+        data-testid="new-todo-add-button"
+      >
         추가
       </button>
-    </>
+    </section>
   );
 }
 
 export default TodoAdd;
+
+// Styled Component
+const Input = styled.input`
+  height: 50px;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  padding-left: 5px;
+  margin: 70px 30px 40px 0;
+  :focus {
+    outline: none;
+  }
+  ::placeholder {
+    color: white;
+    opacity: 0.5;
+  }
+`;
