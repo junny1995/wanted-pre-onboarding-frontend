@@ -13,7 +13,7 @@ function Header() {
   const authCtx = useContext(AuthContext);
   const isLoggedIn = authCtx.isLoggedIn;
 
-  // 로그아웃 함수
+  // 로그아웃
   const signoutHandler = () => {
     authCtx.logout();
     navigate("/");
